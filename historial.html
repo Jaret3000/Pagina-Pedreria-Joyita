@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Pedidos</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Matemasie&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1 class="titulo">Historial de Pedidos</h1>
+    </header>
+
+    <div class="nav-bg">
+        <nav class="navegacion-principal contenedor">
+            <a href="index.html" class="nav-link" id="inicio-link">Inicio</a>
+            <a href="catalogo.html" class="nav-link" id="catalogo-link">Catálogo</a>
+            <a href="carrito.html" class="nav-link" id="carrito-link">Carrito</a>
+            <a href="historial.html" class="nav-link" id="historial-link">Historial de pedidos</a>
+        </nav>
+    </div>
+
+    <main class="contenedor sombra">
+        <h2>Pedidos Realizados</h2>
+        <div id="historial-items" class="productos"></div>
+    </main>
+
+    <footer class="footer">
+        <p>Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        const historial = JSON.parse(localStorage.getItem("historial")) || [];
+        const historialItemsContainer = document.getElementById("historial-items");
+
+        function mostrarHistorial() {
+            if (historial.length === 0) {
+                historialItemsContainer.innerHTML = "<p>No hay pedidos en el historial.</p>";
+                return;
+            }
+
+            historial.forEach(pedido => {
+                const pedidoHTML = `
+                    <div class="producto">
+                        <h3>Pedido: ${pedido.fecha}</h3>
+                        <ul>
+                            ${pedido.items.map(item => `
+                                <li>${item.cantidad}x ${item.nombre} - $${item.precio} (Subtotal: $${(item.cantidad * item.precio).toFixed(2)})</li>
+                            `).join('')}
+                        </ul>
+                        <p>Total: $${pedido.total.toFixed(2)}</p>
+                    </div>
+                `;
+                historialItemsContainer.insertAdjacentHTML('beforeend', pedidoHTML);
+            });
+        }
+
+        mostrarHistorial();
+    </script>
+</body>
+</html>

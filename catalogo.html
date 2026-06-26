@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Servicios</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Matemasie&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1 class="titulo">Pedreria Joyita <span>Materiales textiles y servicios personalizados.</span></h1>
+    </header>
+    
+    <div class="nav-bg">
+        <nav class="navegacion-principal contenedor">
+            <a href="index.html" class="nav-link" id="inicio-link">Inicio</a>
+            <a href="catalogo.html" class="nav-link" id="catalogo-link">Catálogo</a>
+            <a href="carrito.html" class="nav-link" id="carrito-link">Carrito</a>
+            <a href="historial.html" class="nav-link" id="historial-link">Historial de pedidos</a>
+        </nav>
+    </div>
+
+    <main class="contenedor sombra">
+        <h2>Catálogo de Servicios</h2>
+        <div class="productos">
+            <!-- Producto 1 -->
+            <div class="producto">
+                <img src="img/producto1.jpg" alt="Producto 1">
+                <h3>Servicio de sublimado - $150.00 MXN</h3>
+                <p>Personalización de materiales textiles con estampado.</p>
+                <label for="material1">Material de Tela:</label>
+                <select id="material1" name="material1" class="input-select">
+                    <option value="algodon">Algodón</option>
+                    <option value="lona">Lona</option>
+                    <option value="poliester">Poliéster</option>
+                    <option value="lycra">Lycra</option>
+                    <option value="plastico">Plástico Acrílico</option>
+                </select>
+                <label for="cantidad1">Cantidad:</label>
+                <input type="number" id="cantidad1" name="cantidad1" class="input-text" min="1" value="1">
+                <button onclick="agregarAlCarrito('Servicio de sublimado', 150, document.getElementById('cantidad1').value)" class="boton agregar-carrito">Agregar al Carrito</button>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="producto">
+                <img src="img/producto2.jpg" alt="Producto 2">
+                <h3>Servicio de Termo personalizado - $170.00 MXN</h3>
+                <p>Personalización de termo de acuerdo al diseño indicado.</p>
+                <label for="cantidad2">Cantidad:</label>
+                <input type="number" id="cantidad2" name="cantidad2" class="input-text" min="1" value="1">
+                <button onclick="agregarAlCarrito('Servicio de Termo personalizado', 170, document.getElementById('cantidad2').value)" class="boton agregar-carrito">Agregar al Carrito</button>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="producto">
+                <img src="img/producto3.jpg" alt="Producto 3">
+                <h3>Servicio de corte de laser en madera - $170.00 MXN</h3>
+                <p>Servicio de corte en madera, según tipo de madera y diseño.</p>
+                <label for="madera-maciza">Tipo de Madera Maciza:</label>
+                <select id="madera-maciza" name="madera-maciza" class="input-select">
+                    <option value="cerezo">Cerezo</option>
+                    <option value="nogal">Nogal</option>
+                    <option value="arce">Arce</option>
+                    <option value="aliso">Aliso</option>
+                </select>
+                <label for="contrachapado">Tipo de Contrachapado:</label>
+                <select id="contrachapado" name="contrachapado" class="input-select">
+                    <option value="mdf">MDF</option>
+                    <option value="dm">DM</option>
+                </select>
+                <label for="cantidad3">Cantidad:</label>
+                <input type="number" id="cantidad3" name="cantidad3" class="input-text" min="1" value="1">
+                <button onclick="agregarAlCarrito('Servicio de corte de laser en madera', 170, document.getElementById('cantidad3').value)" class="boton agregar-carrito">Agregar al Carrito</button>
+            </div>
+
+            <!-- Producto 4 -->
+            <div class="producto">
+                <img src="img/producto4.jpg" alt="Producto 4">
+                <h3>Servicio de pedrería - $50 - $150 MXN</h3>
+                <p>Incluye diseño de la piedra y tipo de material a usar.</p>
+                <label for="material-tela">Material de Tela:</label>
+                <select id="material-tela" name="material-tela" class="input-select">
+                    <option value="lona">Lona</option>
+                    <option value="felpa">Felpa</option>
+                    <option value="gamuza">Gamuza</option>
+                    <option value="nubuck">Nubuck</option>
+                    <option value="mezclilla">Mezclilla</option>
+                    <option value="cuero">Cuero</option>
+                    <option value="terciopelo">Terciopelo</option>
+                    <option value="gabardina">Gabardina</option>
+                    <option value="seda">Seda</option>
+                    <option value="algodon">Algodón</option>
+                </select>
+                <label for="tipo-piedra">Tipo de Piedra:</label>
+                <select id="tipo-piedra" name="tipo-piedra" class="input-select">
+                    <option value="redonda">Redonda</option>
+                    <option value="cuadrada">Cuadrada</option>
+                    <option value="rombo">Rombo</option>
+                    <option value="triangular">Triangular</option>
+                </select>
+                <label for="cantidad4">Cantidad:</label>
+                <input type="number" id="cantidad4" name="cantidad4" class="input-text" min="1" value="1">
+                <button onclick="agregarAlCarrito('Servicio de pedrería', getPrecioProducto4(), document.getElementById('cantidad4').value)" class="boton agregar-carrito">Agregar al Carrito</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const target = event.target.id === 'catalogo-link' ? 'catalogo.html' : 
+                                event.target.id === 'carrito-link' ? 'carrito.html' : 
+                                'index.html';
+                fetch(target)
+                    .then(response => response.text())
+                    .then(html => {
+                        document.open();
+                        document.write(html);
+                        document.close();
+                    })
+                    .catch(error => console.error('Error loading page:', error));
+            });
+        });
+
+        function agregarAlCarrito(nombre, precio, cantidad) {
+            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            const servicioExistente = carrito.find(item => item.nombre === nombre);
+            if (servicioExistente) {
+                servicioExistente.cantidad = parseInt(servicioExistente.cantidad) + parseInt(cantidad);
+            } else {
+                carrito.push({ nombre, precio, cantidad: parseInt(cantidad) });
+            }
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            alert(`Agregado ${cantidad}x ${nombre} al carrito.`);
+        }
+
+        function getPrecioProducto4() {
+            return Math.floor(Math.random() * (150 - 50 + 1)) + 50;
+        }
+    </script>
+</body>
+</html>
